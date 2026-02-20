@@ -27,7 +27,13 @@ import com.a1b.dw.cloudinary.vo.DeleteR;
 
 @RestController
 @RequestMapping(value = "/v1/cloudinary")
-@CrossOrigin(origins = "https://okee.in")
+@CrossOrigin(origins = {
+	    "https://dayworks.co",
+	    "https://workday24-fd282.web.app",
+	    "http://localhost:8080",
+	    "http://localhost:5173",
+	    "https://localhost:5173"
+	})
 public class CloudinaryController {
   
 	
