@@ -33,8 +33,22 @@ public class CloudinaryConfig {
 				  "api_secret", apisecret));
 		return cloudinary;
 	}
-	
-	
+	public Map<?, ?> docUpload(File file)
+	{
+	try {
+		cloudinary.uploader().upload(
+			    file,
+			    ObjectUtils.asMap(
+			        "resource_type", "raw",
+			        "folder", "documents",
+			        "use_filename", true
+			    )
+			);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	return Collections.emptyMap();
+	}
 	public Map<?, ?> fileUpload(File file)
 	{
 		cloudinary = getCloudinary();

@@ -60,6 +60,26 @@ public class CloudinaryController {
 		return null;
 	}
 	
+	@PostMapping(value = "/doc")
+	public ResponseEntity<Map> docUpload(@RequestParam(value="file", required=true) MultipartFile aFile)
+	{
+		try
+        {
+			logger.info(aFile.getSize());
+            File f=Files.createTempFile("temp", aFile.getOriginalFilename()).toFile();
+            aFile.transferTo(f);
+            Map<?, ?> response=cloudinaryConfig.docUpload(f);
+            return ResponseEntity.ok()
+            		.body(response);
+        }
+		catch(Exception e)
+        {
+            logger.info(e.getMessage());
+        }
+		return null;
+	}
+	
+	
 	@PostMapping(value = "/zip")
 	public ResponseEntity<Map> uploadZip(@RequestParam(value="file", required=true) MultipartFile aFile)
 	{
