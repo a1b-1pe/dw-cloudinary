@@ -35,9 +35,11 @@ public class CloudinaryConfig {
 	}
 	public Map<?, ?> docUpload(File file)
 	{
+		cloudinary = getCloudinary();
+		File toUpload = file;
 	try {
 		cloudinary.uploader().upload(
-			    file,
+				toUpload,
 			    ObjectUtils.asMap(
 			        "resource_type", "raw",
 			        "folder", "documents",
