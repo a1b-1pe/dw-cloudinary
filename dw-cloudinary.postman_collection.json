@@ -8,7 +8,7 @@
   "variable": [
     {
       "key": "cloudUrl",
-      "value": "https://dw-cloudinary-5718687f18bb.herokuapp.com",
+      "value": "http://localhost:8080",
       "type": "string"
     },
     {

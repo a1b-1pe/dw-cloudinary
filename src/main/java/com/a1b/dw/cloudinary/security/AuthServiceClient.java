@@ -20,7 +20,7 @@ public class AuthServiceClient {
     private final RestClient restClient;
 
     public AuthServiceClient(
-            @Value("${auth-service.base-url:https://ld-authorization-service-e47c3397469c.herokuapp.com}") String baseUrl,
+            @Value("${auth-service.base-url}") String baseUrl,
             @Value("${auth-service.connect-timeout-ms:3000}") int connectTimeoutMs,
             @Value("${auth-service.read-timeout-ms:5000}") int readTimeoutMs) {
 
