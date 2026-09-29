@@ -8,13 +8,15 @@
   "variable": [
     {
       "key": "cloudUrl",
-      "value": "http://localhost:8080",
-      "type": "string"
+      "value": "https://dw-cloudinary-921986999976.asia-south1.run.app",
+      "type": "string",
+      "description": "dw-cloudinary on Google Cloud Run (asia-south1)"
     },
     {
       "key": "publicId",
       "value": "sample_public_id",
-      "type": "string"
+      "type": "string",
+      "description": "Cloudinary public_id. Set automatically by Upload Image."
     },
     {
       "key": "bearerToken",
@@ -36,6 +38,7 @@
         {
           "name": "Health Check",
           "request": {
+            "auth": { "type": "noauth" },
             "method": "GET",
             "header": [],
             "url": {
@@ -53,6 +56,20 @@
       "item": [
         {
           "name": "Upload Image",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));",
+                  "if (pm.response.code === 200) {",
+                  "    pm.collectionVariables.set('publicId', pm.response.json().public_id);",
+                  "}"
+                ]
+              }
+            }
+          ],
           "request": {
             "method": "POST",
             "header": [],
@@ -72,7 +89,7 @@
               "host": ["{{cloudUrl}}"],
               "path": ["v1", "cloudinary", "image"]
             },
-            "description": "Upload an image to Cloudinary. Returns Cloudinary upload response map."
+            "description": "Upload an image to Cloudinary. Returns the Cloudinary upload response; public_id is saved to {{publicId}}."
           }
         },
         {
